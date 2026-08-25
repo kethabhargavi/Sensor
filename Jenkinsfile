@@ -15,9 +15,20 @@ pipeline {
             }
         }
 
-        stage('Test Docker Image') {
+        stage('Test Docker Container') {
             steps {
-                bat 'docker images sensor-dashboard'
+                bat '''
+                    docker rm -f sensor-dashboard-test 2>NUL || exit 0
+                    docker run -d --name sensor-dashboard-test -p 8502:8501 sensor-dashboard
+                    timeout /t 10 /nobreak
+                    docker ps --filter "name=sensor-dashboard-test"
+                '''
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                bat 'docker rm -f sensor-dashboard-test 2>NUL || exit 0'
             }
         }
     }
