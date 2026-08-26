@@ -312,5 +312,6 @@ if not df.empty:
 st.markdown("---")
 
 st.caption(
-    "Built using Streamlit + SQLite + Python"
+    "Built using Python + Streamlit + SQLite | "
+    "Containerized with Docker | Deployed using Jenkins CI/CD"
 )
