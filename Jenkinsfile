@@ -18,9 +18,9 @@ pipeline {
         stage('Test Docker Container') {
             steps {
                 bat '''
-                    docker rm -f sensor-dashboard-test 2>NUL || exit 0
+                    docker rm -f sensor-dashboard-test 2>NUL || exit /b 0
                     docker run -d --name sensor-dashboard-test -p 8502:8501 sensor-dashboard
-                    timeout /t 10 /nobreak
+                    powershell -Command "Start-Sleep -Seconds 10"
                     docker ps --filter "name=sensor-dashboard-test"
                 '''
             }
@@ -28,16 +28,16 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                bat 'docker rm -f sensor-dashboard-test 2>NUL || exit 0'
+                bat 'docker rm -f sensor-dashboard-test 2>NUL || exit /b 0'
             }
         }
 
         stage('Deploy') {
             steps {
                 bat '''
-                    docker rm -f sensor-dashboard-container 2>NUL || exit 0
+                    docker rm -f sensor-dashboard-container 2>NUL || exit /b 0
                     docker run -d --name sensor-dashboard-container -p 8501:8501 sensor-dashboard
-                    timeout /t 5 /nobreak
+                    powershell -Command "Start-Sleep -Seconds 5"
                     docker ps --filter "name=sensor-dashboard-container"
                 '''
             }
