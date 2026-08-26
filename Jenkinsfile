@@ -31,11 +31,22 @@ pipeline {
                 bat 'docker rm -f sensor-dashboard-test 2>NUL || exit 0'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                bat '''
+                    docker rm -f sensor-dashboard-container 2>NUL || exit 0
+                    docker run -d --name sensor-dashboard-container -p 8501:8501 sensor-dashboard
+                    timeout /t 5 /nobreak
+                    docker ps --filter "name=sensor-dashboard-container"
+                '''
+            }
+        }
     }
 
     post {
         success {
-            echo 'Sensor Dashboard CI pipeline completed successfully!'
+            echo 'Sensor Dashboard CI/CD pipeline completed successfully!'
         }
 
         failure {
