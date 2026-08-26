@@ -4,9 +4,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.set_page_config(
-    page_title="Sensor Dashboard",
+    page_title="Sensor Dashboard - Jenkins CI/CD",
     page_icon="📈",
     layout="wide"
+
 )
 
 # =========================================================
