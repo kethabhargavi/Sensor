@@ -315,3 +315,5 @@ st.caption(
     "Built using Python + Streamlit + SQLite | "
     "Containerized with Docker | Deployed using Jenkins CI/CD"
 )
+
+st.success("🟢 Application deployed successfully via Jenkins CI/CD")
