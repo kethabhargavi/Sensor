@@ -341,11 +341,22 @@ This project demonstrates practical experience with:
 
 # 📸 Dashboard Preview
 
-Add a screenshot of the running dashboard:
+### 🏠 Dashboard Home
 
-```text
-![Sensor Analytics Dashboard](dashboard-preview.png)
-```
+<img src="Screenshots/Home.png" width="450">
+
+---
+
+### 📈 Temperature Trend
+
+<img src="Screenshots/Temp_Trend.png" width="450">
+
+---
+
+### 💧 Humidity Trend
+
+<img src="Screenshots/Humdity_Trend.png" width="450">
+
 
 ---
 
