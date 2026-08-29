@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -9,26 +10,22 @@ pipeline {
             }
         }
 
-        stage('Python Validation') {
-            steps {
-                bat '''
-                    echo Checking Python installation...
-                    python --version
-
-                    echo Checking Python syntax...
-                    python -m py_compile app.py
-
-                    echo Python validation completed successfully.
-                '''
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
 
                 bat '''
                     docker build -t sensor-dashboard .
+                '''
+            }
+        }
+
+        stage('Python Validation') {
+            steps {
+                echo 'Validating Python application inside Docker...'
+
+                bat '''
+                    docker run --rm sensor-dashboard python -m py_compile app.py
                 '''
             }
         }
@@ -94,6 +91,7 @@ pipeline {
             echo '=============================================='
             echo 'Sensor Dashboard CI/CD pipeline completed!'
             echo 'Docker image built successfully.'
+            echo 'Python validation completed successfully.'
             echo 'Docker container tested successfully.'
             echo 'Application deployed successfully.'
             echo 'Application: http://localhost:8501'
@@ -112,3 +110,4 @@ pipeline {
         }
     }
 }
+```
